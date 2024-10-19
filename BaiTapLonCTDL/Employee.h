@@ -60,7 +60,7 @@ void CinE(Employee& a) {
 	cout << '\n';
 }
 
-string Searching(Employee& a) {
+string SearchingDepartment(Employee& a) {
 	switch (a.MaNhanVien[0])
 	{
 	case 'K': return "KinhDoanh";
@@ -72,7 +72,7 @@ string Searching(Employee& a) {
 }
 
 void CinInfEmployee(Employee& a) {
-	string outline = Searching(a);
+	string outline = SearchingDepartment(a);
 	int day = a.Birth.Day;
 	int month = a.Birth.Month;
 	int year = a.Birth.Year;
@@ -103,6 +103,7 @@ void CoutE(Employee& a) {
 		<< "Ngay Sinh: "; CoutDate(a.Birth); cout << endl;
 	cout << "So Dien Thoai: " << a.SoDienThoai << endl;
 }
+
 bool operator==(const Employee& a, const Employee& b) {
 	if (a.Birth == b.Birth && a.ChucVu == b.ChucVu && a.MaNhanVien == b.MaNhanVien && a.Name == b.Name && a.PhongBan == b.PhongBan && a.SoDienThoai == b.SoDienThoai) return true;
 	return false;

@@ -12,6 +12,7 @@ struct Date {
 		Year = another.Year;
 	}
 };
+
 void InitDate(Date& a) {
 	a.Day = a.Month = a.Year = 0;
 }
@@ -31,6 +32,7 @@ int DayOfMonth(int m, Date& a) {
 		return 31;
 	}
 }
+
 
 void SetDate(Date& a, int d, int m, int y) {
 	a.Day = Limit(d, 1, DayOfMonth(m ,a));
