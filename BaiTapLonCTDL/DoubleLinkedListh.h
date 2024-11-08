@@ -4,10 +4,6 @@
 #include<string.h>
 using namespace std;
 
-struct DoubleLinkedList {
-	Node* Head;
-	Node* Tail;
-};
 struct Node {
 	Employee employee;
 	Node* nextL;
@@ -40,8 +36,6 @@ void InsertBegin(DoubleLinkedList& H, Employee& data) {
 		H.Head = newNode;
 	}
 }
-Node* Searching(DoubleLinkedList& H, Employee& data); // Prototype declaration
-void DeleteEnd(DoubleLinkedList& H); // Prototype declaration
 
 void DisPlay(DoubleLinkedList& DL) {
 	if (IsEmpty(DL)) { cout << "Danh Sach Rong!"; }
@@ -157,18 +151,4 @@ void DeleteSelected(DoubleLinkedList& H, Node* P) {
 		P->nextR->nextL = P->nextL;
 		delete P;
 	}
-}
-void DeleteEnd(DoubleLinkedList& H) {
-	if (IsEmpty(H)) return;
-	if (H.Head == H.Tail) {
-		delete H.Head;
-		H.Head = H.Tail = NULL;
-		return;
-	}
-	Node* ptr = H.Head;
-	while (ptr->nextR != NULL) {
-		ptr = ptr->nextR;
-	}
-	ptr->nextL->nextR = NULL;
-	delete ptr;
 }
