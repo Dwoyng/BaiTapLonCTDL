@@ -3,6 +3,7 @@
 #include "DoubleLinkedListh.h"
 #include "Date.h"
 #include "Employee.h"
+#include<filesystem>
 
 Employee a{ "Thai Tuan Duong", "H20223927", "Hanh Chinh", Date{18,8,2004}, "Nhan vien", "0915963236"};
 Employee b{ "Nguyen Minh Quan", "K20224109", "Kinh Doanh", Date{17,10,2004}, "Truong Phong", "091231233" };
@@ -11,12 +12,21 @@ Employee d{ "Dinh Tuan Anh", "H20223844", "Hanh Chinh", Date{19,8,2004}, "Nhan v
 Employee e{ "Ho Quoc Khanh", "K20227621", "Kinh Doanh", Date{11,12,2004}, "Nhan vien", "0432456487" };
 Employee f{ "Dang Duc Thinh", "H20227293", "Nhan Su", Date{30,4,2004}, "Truong Phong", "0231233123" };
 
+void ThemNhanVien(DoubleLinkedList& H) {
+	Employee* employee = new Employee;
+	InitEmployee(*employee);
+	CinInfEmployee(*employee);
+	Node* P = MakeNode(*employee);
+	InsertBegin(H, P->employee);
+	
+}
+
 void Menu(DoubleLinkedList& H) {
 	while (1) {
-		cout << "1. Them nhan vien";
-		cout << "2. Lay thong tin nhan vien bang ma nhan vien";
-		cout << "3. Xoa nhan vien";
-		cout << "4. Hien thi toan bo danh sach nhan vien";
+		cout << "1. Them nhan vien" << endl;
+		cout << "2. Lay thong tin nhan vien bang ma nhan vien" << endl;
+		cout << "3. Xoa nhan vien" << endl;
+		cout << "4. Hien thi toan bo danh sach nhan vien" << endl;
 
 		int m;
 		cout << "Nhap lua chon: ";  cin >> m;
@@ -24,11 +34,7 @@ void Menu(DoubleLinkedList& H) {
 		{
 
 		case 1: {
-			Employee a;
-			InitEmployee(a);
-			CinInfEmployee(a);
-			Node* P = MakeNode(a);
-			InsertBegin(H, P->employee);
+			ThemNhanVien(H);
 			break;
 		}
 
@@ -58,12 +64,14 @@ void Menu(DoubleLinkedList& H) {
 			while (P->nextR) {
 				if (P->employee.MaNhanVien == s) {
 					DeleteSelected(H, P);
+					cout << "Xoa thanh cong!";
 					break;
 				}
 				P = P->nextR;
 			}
 			if (P->employee.MaNhanVien == s) {
 				DeleteSelected(H, P);
+				cout << "Xoa thanh cong!";
 				break;
 			}
 			cout << "Khong tim thay nhan vien nay!";

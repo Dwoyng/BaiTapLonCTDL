@@ -10,6 +10,13 @@ struct Node {
 	Node* nextR;
 };
 
+struct DoubleLinkedList {
+	Node* Head;
+	Node* Tail;
+};
+
+
+
 void InitDoubleLinkedList(DoubleLinkedList& H) {
 	H.Head = H.Tail = NULL;
 }
@@ -18,7 +25,19 @@ bool IsEmpty(DoubleLinkedList& H) {
 	return H.Head == NULL;
 }
 
-Node* MakeNode(Employee& a) {
+Node* Searching(DoubleLinkedList& H, Employee& data) {
+	if (IsEmpty(H)) return NULL;
+	else {
+		Node* ptr = H.Head;
+		while (ptr)
+		{
+			if (data == ptr->employee) return ptr;
+			ptr = ptr->nextR;
+		}
+	}
+}
+
+Node* MakeNode(Employee a) {
 	Node* newNode = new Node;
 	newNode->employee = a;
 	newNode->nextL = NULL;
@@ -36,6 +55,7 @@ void InsertBegin(DoubleLinkedList& H, Employee& data) {
 		H.Head = newNode;
 	}
 }
+
 
 void DisPlay(DoubleLinkedList& DL) {
 	if (IsEmpty(DL)) { cout << "Danh Sach Rong!"; }
@@ -89,17 +109,7 @@ void InsertTail(DoubleLinkedList& H, Employee& data) {
 	ptr->nextR = A;
 }
 
-Node* Searching(DoubleLinkedList& H, Employee& data) {
-	if (IsEmpty(H)) return NULL;
-	else {
-		Node* ptr = H.Head;
-		while (ptr)
-		{
-			if (data == ptr->employee) return ptr;
-			ptr = ptr->nextR;
-		}
-	}
-}
+
 // THEM PHAN TU VAO 1 PHAN TU SAU 1 PHAN TU DUOC CHI DINH
 void InSertAfter(DoubleLinkedList& H, Employee data, Node* P) {
 	if (IsEmpty(H)) {
@@ -118,7 +128,20 @@ void InSertAfter(DoubleLinkedList& H, Employee data, Node* P) {
 	P->nextR = A;
 }
 
-
+void DeleteEnd(DoubleLinkedList& H) {
+	if (IsEmpty(H)) return;
+	if (H.Head == H.Tail) {
+		delete H.Head;
+		H.Head = H.Tail = NULL;
+		return;
+	}
+	Node* ptr = H.Head;
+	while (ptr->nextR != NULL) {
+		ptr = ptr->nextR;
+	}
+	ptr->nextL->nextR = NULL;
+	delete ptr;
+}
 
 void DeleteBegin(DoubleLinkedList& H) {
 	if (IsEmpty(H)) return;
@@ -152,3 +175,4 @@ void DeleteSelected(DoubleLinkedList& H, Node* P) {
 		delete P;
 	}
 }
+

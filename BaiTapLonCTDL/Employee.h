@@ -23,8 +23,8 @@ struct Employee {
 		Birth = b.Birth;
 		ChucVu = b.ChucVu;
 		SoDienThoai = b.SoDienThoai;
+		return *this;
 }
-	
 };
 
 void InitEmployee(Employee& a) {
@@ -61,11 +61,13 @@ void CinE(Employee& a) {
 }
 
 string SearchingDepartment(Employee& a) {
-	switch (a.MaNhanVien[0])
+	string s;
+	char c = a.MaNhanVien[0];
+	switch (c)
 	{
-	case 'K': return "KinhDoanh";
-	case 'N': return "NhanSu";
-	case'H': return "KinhDoanh";
+	case 'K': return  s = "KinhDoanh";
+	case 'N': return s = "NhanSu";
+	case'H': return s = "KinhDoanh";
 	default:
 		break;
 	}
@@ -77,6 +79,7 @@ void CinInfEmployee(Employee& a) {
 	int month = a.Birth.Month;
 	int year = a.Birth.Year;
 	string name = a.Name;
+	
 	CinE(a);
 	ofstream file;
 	file.open("C:\\Users\\ADMIN\\Arduino IDE\\BaiTapLonCTDL\\" + outline + "\\" + name, ios::app);

@@ -10,6 +10,7 @@ struct Date {
 		Day = another.Day;
 		Month = another.Month;
 		Year = another.Year;
+		return *this;
 	}
 };
 
