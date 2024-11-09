@@ -1,11 +1,11 @@
 #include<iostream>
 #include<string.h>
-#include "DoubleLinkedListh.h"
+#include "Doubledlinked.h"
 #include "Date.h"
 #include "Employee.h"
 //#include<filesystem>
 
-Employee a{ "Thai Tuan Duong", "H20223927", "Hanh Chinh", Date{18,8,2004}, "Nhan vien", "0915963236"};
+Employee a{ "Thai Tuan Duong", "H20223927", "Hanh Chinh", Date{18,8,2004}, "Nhan vien", "0915963236" };
 Employee b{ "Nguyen Minh Quan", "K20224109", "Kinh Doanh", Date{17,10,2004}, "Truong Phong", "091231233" };
 Employee c{ "Truong Thanh Phong", "N20222134", "Nhan Su", Date{9,5,2004}, "Pho Truong Phong", "0356234678" };
 Employee d{ "Dinh Tuan Anh", "H20223844", "Hanh Chinh", Date{19,8,2004}, "Nhan vien", "0231321323" };
@@ -43,16 +43,16 @@ void Menu(DoubleLinkedList& H) {
 			Node* P = H.Head;
 			while (P->nextR)
 			{
-				if (P->employee.MaNhanVien == s) { 
-					CoutE(P->employee); 
+				if (P->employee.MaNhanVien == s) {
+					CoutE(P->employee);
 					break;
 				}
 				P = P->nextR;
-				if (P->employee.MaNhanVien == s) { 
-				CoutE(P->employee); 
-				break;
+				cout << "Nhap thanh cong!";
 			}
-			cout << "Nhap thanh cong!";
+			if (P->employee.MaNhanVien == s) {
+				CoutE(P->employee);
+				break;
 			}
 			break;
 		}
@@ -106,5 +106,5 @@ int main() {
 	InsertBegin(DL, e);
 	InsertBegin(DL, f);
 	Menu(DL);
-	
+
 }

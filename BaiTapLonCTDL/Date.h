@@ -24,7 +24,7 @@ int Limit(int v, int max, int min) {
 }
 
 int DayOfMonth(int m, Date& a) {
-	
+
 	switch (m)
 	{
 	case 2: return a.Year & 3 ? 28 : 29;
@@ -36,7 +36,7 @@ int DayOfMonth(int m, Date& a) {
 
 
 void SetDate(Date& a, int d, int m, int y) {
-	a.Day = Limit(d, 1, DayOfMonth(m ,a));
+	a.Day = Limit(d, 1, DayOfMonth(m, a));
 	a.Month = Limit(m, 1, 12);
 	a.Year = y;
 }

@@ -4,7 +4,7 @@
 #include<sstream>
 #include<fstream>
 #include "Date.h"
-#include <direct.h>   // Thư viện cho Windows để tạo thư mục
+#include <direct.h>   // Th? vi?n cho Windows ?? t?o th? m?c
 #include <sys/stat.h>
 using namespace std;
 
@@ -17,9 +17,9 @@ struct Employee {
 	Date Birth;
 	string ChucVu;
 	string SoDienThoai;
-	
-	Employee&  operator=(Employee& b) {
-		
+
+	Employee& operator=(Employee& b) {
+
 		Name = b.Name;
 		MaNhanVien = b.MaNhanVien;
 		PhongBan = b.PhongBan;
@@ -27,7 +27,7 @@ struct Employee {
 		ChucVu = b.ChucVu;
 		SoDienThoai = b.SoDienThoai;
 		return *this;
-}
+	}
 
 };
 
@@ -38,31 +38,34 @@ void InitEmployee(Employee& a) {
 
 void CinE(Employee& a) {
 	cout << "Nhap ho va ten: ";
-	cin.ignore();
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Lo?i b? ph?n còn l?i c?a dòng tr??c ?ó (n?u có)
 	getline(cin, a.Name);
 	cout << '\n';
-	cout << "Nhap ngay sinh:";
+
+	cout << "Nhap ngay sinh (dd mm yyyy): ";
 	int d, m, y;
 	cin >> d >> m >> y;
 	SetDate(a.Birth, d, m, y);
 	cout << '\n';
+
 	cout << "Nhap chuc vu: ";
-	cin.ignore();
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Lo?i b? ký t? xu?ng dòng tr??c khi g?i getline
 	getline(cin, a.ChucVu);
 	cout << '\n';
+
 	cout << "Nhap ma nhan vien: ";
-	cin.ignore();
 	getline(cin, a.MaNhanVien);
 	cout << '\n';
+
 	cout << "Nhap so dien thoai: ";
-	cin.ignore();
 	getline(cin, a.SoDienThoai);
 	cout << '\n';
+
 	cout << "Nhap phong ban: ";
-	cin.ignore();
 	getline(cin, a.PhongBan);
 	cout << '\n';
 }
+
 
 /*string SearchingDepartment(Employee& a) {
 	string s;
@@ -85,8 +88,8 @@ void CinE(Employee& a) {
 	int month = a.Birth.Month;
 	int year = a.Birth.Year;
 	string name = a.Name;
-	
-	
+
+
 	ofstream file;
 	file.open("C:\\Users\\ADMIN\\Downloads\\Data_Base_Of_Employee\\" + outline + "\\" + name + ".txt", ios::app);
 	if (file.is_open()) {
@@ -103,13 +106,13 @@ void CinE(Employee& a) {
 	}
 
 }*/
-// Hàm kiểm tra xem thư mục có tồn tại hay không
+// Hàm ki?m tra xem th? m?c có t?n t?i hay không
 bool directoryExists(const std::string& dirPath) {
 	struct stat info;
 	if (stat(dirPath.c_str(), &info) != 0) {
-		return false; // Không thể truy cập thư mục
+		return false; // Không th? truy c?p th? m?c
 	}
-	return (info.st_mode & S_IFDIR) != 0; // Kiểm tra nếu là thư mục
+	return (info.st_mode & S_IFDIR) != 0; // Ki?m tra n?u là th? m?c
 }
 
 // Hàm ghi thông tin nhân viên vào file
@@ -119,7 +122,7 @@ void CinInfEmployee(Employee& a) {
 	std::string name = a.Name;
 	std::string folderPath = "C:\\Users\\ADMIN\\Downloads\\Data_Base_Of_Employee\\" + outline;
 
-	// Tạo thư mục nếu chưa tồn tại
+	// T?o th? m?c n?u ch?a t?n t?i
 	if (!directoryExists(folderPath)) {
 		_mkdir(folderPath.c_str());
 	}
