@@ -3,7 +3,7 @@
 #include "DoubleLinkedListh.h"
 #include "Date.h"
 #include "Employee.h"
-#include<filesystem>
+//#include<filesystem>
 
 Employee a{ "Thai Tuan Duong", "H20223927", "Hanh Chinh", Date{18,8,2004}, "Nhan vien", "0915963236"};
 Employee b{ "Nguyen Minh Quan", "K20224109", "Kinh Doanh", Date{17,10,2004}, "Truong Phong", "091231233" };
@@ -17,8 +17,7 @@ void ThemNhanVien(DoubleLinkedList& H) {
 	InitEmployee(*employee);
 	CinInfEmployee(*employee);
 	Node* P = MakeNode(*employee);
-	InsertBegin(H, P->employee);
-	
+	InsertTail(H, P->employee);
 }
 
 void Menu(DoubleLinkedList& H) {
@@ -49,12 +48,13 @@ void Menu(DoubleLinkedList& H) {
 					break;
 				}
 				P = P->nextR;
-			}
-			if (P->employee.MaNhanVien == s) { 
+				if (P->employee.MaNhanVien == s) { 
 				CoutE(P->employee); 
 				break;
 			}
 			cout << "Nhap thanh cong!";
+			}
+			break;
 		}
 
 		case 3: {
@@ -75,6 +75,7 @@ void Menu(DoubleLinkedList& H) {
 				break;
 			}
 			cout << "Khong tim thay nhan vien nay!";
+			break;
 		}
 
 		case 4: {
@@ -105,4 +106,5 @@ int main() {
 	InsertBegin(DL, e);
 	InsertBegin(DL, f);
 	Menu(DL);
+	
 }

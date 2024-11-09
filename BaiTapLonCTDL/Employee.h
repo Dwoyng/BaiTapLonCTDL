@@ -1,9 +1,11 @@
-#pragma once
+﻿#pragma once
 #include<iostream>
 #include<string>
 #include<sstream>
 #include<fstream>
 #include "Date.h"
+#include <direct.h>   // Thư viện cho Windows để tạo thư mục
+#include <sys/stat.h>
 using namespace std;
 
 
@@ -16,7 +18,8 @@ struct Employee {
 	string ChucVu;
 	string SoDienThoai;
 	
-	Employee&  operator=(const Employee& b) {
+	Employee&  operator=(Employee& b) {
+		
 		Name = b.Name;
 		MaNhanVien = b.MaNhanVien;
 		PhongBan = b.PhongBan;
@@ -25,6 +28,7 @@ struct Employee {
 		SoDienThoai = b.SoDienThoai;
 		return *this;
 }
+
 };
 
 void InitEmployee(Employee& a) {
@@ -60,29 +64,31 @@ void CinE(Employee& a) {
 	cout << '\n';
 }
 
-string SearchingDepartment(Employee& a) {
+/*string SearchingDepartment(Employee& a) {
 	string s;
 	char c = a.MaNhanVien[0];
 	switch (c)
 	{
-	case 'K': return  s = "KinhDoanh";
-	case 'N': return s = "NhanSu";
-	case'H': return s = "KinhDoanh";
-	default:
-		break;
+	case 'K': return  s = "Kinh Doanh";
+	case 'N': return s = "Nhan Su";
+	case'H': return s = "Hanh Chinh";
 	}
+	return " ";
 }
+*/
 
-void CinInfEmployee(Employee& a) {
-	string outline = SearchingDepartment(a);
+/*void CinInfEmployee(Employee& a) {
+	//string outline = SearchingDepartment(a);
+	CinE(a);
+	string outline = a.PhongBan;
 	int day = a.Birth.Day;
 	int month = a.Birth.Month;
 	int year = a.Birth.Year;
 	string name = a.Name;
 	
-	CinE(a);
+	
 	ofstream file;
-	file.open("C:\\Users\\ADMIN\\Arduino IDE\\BaiTapLonCTDL\\" + outline + "\\" + name, ios::app);
+	file.open("C:\\Users\\ADMIN\\Downloads\\Data_Base_Of_Employee\\" + outline + "\\" + name + ".txt", ios::app);
 	if (file.is_open()) {
 		file << a.Name << endl
 			<< a.ChucVu << endl
@@ -91,13 +97,47 @@ void CinInfEmployee(Employee& a) {
 			<< a.PhongBan << endl
 			<< a.SoDienThoai << endl;
 		file.close();
-		cout << "Ghi thanh cong!";
 	}
 	else {
-		"Khong tim thay phong nay!";
+		cout << "Khong tim thay phong ban nay !" << endl;
 	}
+
+}*/
+// Hàm kiểm tra xem thư mục có tồn tại hay không
+bool directoryExists(const std::string& dirPath) {
+	struct stat info;
+	if (stat(dirPath.c_str(), &info) != 0) {
+		return false; // Không thể truy cập thư mục
+	}
+	return (info.st_mode & S_IFDIR) != 0; // Kiểm tra nếu là thư mục
 }
 
+// Hàm ghi thông tin nhân viên vào file
+void CinInfEmployee(Employee& a) {
+	CinE(a);
+	std::string outline = a.PhongBan;
+	std::string name = a.Name;
+	std::string folderPath = "C:\\Users\\ADMIN\\Downloads\\Data_Base_Of_Employee\\" + outline;
+
+	// Tạo thư mục nếu chưa tồn tại
+	if (!directoryExists(folderPath)) {
+		_mkdir(folderPath.c_str());
+	}
+
+	std::ofstream file(folderPath + "\\" + name + ".txt", std::ios::app);
+	if (file.is_open()) {
+		file << a.Name << std::endl
+			<< a.ChucVu << std::endl
+			<< a.Birth.Day << '/' << a.Birth.Month << '/' << a.Birth.Year << std::endl
+			<< a.MaNhanVien << std::endl
+			<< a.PhongBan << std::endl
+			<< a.SoDienThoai << std::endl;
+		file.close();
+	}
+	else {
+		std::cout << "Khong tim thay phong ban nay!" << std::endl;
+	}
+}
 void CoutE(Employee& a) {
 	cout << "Ho va Ten: " << a.Name << endl
 		<< "Chuc Vu: " << a.ChucVu << endl

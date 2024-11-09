@@ -8,6 +8,7 @@ struct Node {
 	Employee employee;
 	Node* nextL;
 	Node* nextR;
+	Node() : nextL(nullptr), nextR(nullptr) {}
 };
 
 struct DoubleLinkedList {
@@ -35,6 +36,7 @@ Node* Searching(DoubleLinkedList& H, Employee& data) {
 			ptr = ptr->nextR;
 		}
 	}
+	return NULL;
 }
 
 Node* MakeNode(Employee a) {

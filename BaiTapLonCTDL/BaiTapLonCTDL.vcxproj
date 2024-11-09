@@ -131,9 +131,6 @@
     <ClInclude Include="DoubleLinkedListh.h" />
     <ClInclude Include="Employee.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Main.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
