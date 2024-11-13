@@ -11,13 +11,13 @@ Employee c{ "Truong Thanh Phong", "N20222134", "Nhan Su", Date{9,5,2004}, "Pho T
 Employee d{ "Dinh Tuan Anh", "H20223844", "Hanh Chinh", Date{19,8,2004}, "Nhan vien", "0231321323" };
 Employee e{ "Ho Quoc Khanh", "K20227621", "Kinh Doanh", Date{11,12,2004}, "Nhan vien", "0432456487" };
 Employee f{ "Dang Duc Thinh", "H20227293", "Nhan Su", Date{30,4,2004}, "Truong Phong", "0231233123" };
+DoubleLinkedList DL;
 
 void ThemNhanVien(DoubleLinkedList& H) {
 	Employee* employee = new Employee;
 	InitEmployee(*employee);
 	CinInfEmployee(*employee);
-	Node* P = MakeNode(*employee);
-	InsertTail(H, P->employee);
+	InsertBegin(DL, *employee);
 }
 
 void Menu(DoubleLinkedList& H) {
@@ -40,46 +40,51 @@ void Menu(DoubleLinkedList& H) {
 		case 2: {
 			string s;
 			cout << "Nhap ma nhan vien: "; cin >> s;
-			Node* P = H.Head;
-			while (P->nextR)
+			Node* P = DL.Head;
+			while (P->nextR != NULL)
 			{
 				if (P->employee.MaNhanVien == s) {
 					CoutE(P->employee);
 					break;
 				}
 				P = P->nextR;
-				cout << "Nhap thanh cong!";
 			}
 			if (P->employee.MaNhanVien == s) {
 				CoutE(P->employee);
 				break;
 			}
-			break;
+			else
+			{
+				cout << " Khong tim thay nhan vien nay!" << endl;
+				break;
+			}
 		}
 
 		case 3: {
 			string s;
-			cout << "Vui long nhap ma nhan vien muon xoa: "; cin >> s;
-			Node* P = H.Head;
-			while (P->nextR) {
+			cout << "Vui long nhap ma nhan vien muon xoa: " << endl; cin >> s;
+			Node* P = DL.Head;
+			while (P->nextR != NULL) {
 				if (P->employee.MaNhanVien == s) {
 					DeleteSelected(H, P);
-					cout << "Xoa thanh cong!";
+					cout << "Xoa thanh cong!" << endl;
 					break;
 				}
 				P = P->nextR;
 			}
 			if (P->employee.MaNhanVien == s) {
 				DeleteSelected(H, P);
-				cout << "Xoa thanh cong!";
+				cout << "Xoa thanh cong!" << endl;
 				break;
 			}
-			cout << "Khong tim thay nhan vien nay!";
-			break;
+			else {
+				cout << "Khong tim thay nhan vien nay!" << endl;
+				break;
+			}
 		}
 
 		case 4: {
-			Node* P = H.Head;
+			Node* P = DL.Head;
 			while (P->nextR) {
 				CoutE(P->employee);
 				P = P->nextR;
@@ -89,7 +94,7 @@ void Menu(DoubleLinkedList& H) {
 		}
 
 		default:
-			cout << "Vui long nhap lai yeu cau!";
+			cout << "Vui long nhap lai yeu cau!" << endl;
 			break;
 		}
 
@@ -97,7 +102,6 @@ void Menu(DoubleLinkedList& H) {
 }
 
 int main() {
-	DoubleLinkedList DL;
 	InitDoubleLinkedList(DL);
 	InsertBegin(DL, a);
 	InsertBegin(DL, b);
